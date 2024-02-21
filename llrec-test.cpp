@@ -67,6 +67,14 @@ void dealloc(Node* head)
 //   function object struct declarations
 // -----------------------------------------------
 
+struct OOD
+{
+public:
+    bool operator()(int i) const
+    {
+        return i%2==0;
+    }
+};
 
 
 
@@ -86,8 +94,15 @@ int main(int argc, char* argv[])
     print(head);
 
     // Test out your linked list code
-
-
+    llfilter(head, OOD());
+    print(head);
+    Node* smaller, * larger;
+    llpivot(head, smaller, larger, 8);
+    print(smaller);
+    print(larger);
+    dealloc(head);
+    dealloc(smaller);
+    dealloc(larger);
 
     
     return 0;

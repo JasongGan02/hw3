@@ -80,10 +80,30 @@ Node* llfilter(Node* head, Comp pred);
 template <typename Comp>
 Node* llfilter(Node* head, Comp pred)
 {
-    //*********************************************
-    // Provide your implementation below
-    //*********************************************
-
+    Node* tail = head;
+    Node* prev = nullptr;
+    while (tail != nullptr)
+    {
+        if (pred(tail->val))
+        {
+            Node* cur = tail;
+            tail = tail->next;
+            if (prev != nullptr)
+            {
+                prev->next = tail;
+            }
+            else
+                head = tail;
+            delete cur;
+        }
+        else
+        {
+            prev = tail;
+            tail = tail->next;
+        }
+        
+    }
+    return head;
 
 }
 

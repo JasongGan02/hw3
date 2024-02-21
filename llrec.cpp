@@ -4,20 +4,9 @@
 // Provide your implementation of llpivot below
 //*********************************************
 
-
-void llpivot(Node *&head, Node *&smaller, Node *&larger, int pivot)
-{
-    Node* smallerTail = nullptr; 
-    Node* largerTail = nullptr;
-    smaller = larger = nullptr;
-    llpivotHelper(head, smaller, larger, smallerTail, largerTail, pivot);
-    head = nullptr;
-
-}
-
 void llpivotHelper(Node *&current, Node *&smaller, Node *&larger, Node *&smallerTail, Node *&largerTail, int pivot)
 {
-    if (current = nullptr)
+    if (current == nullptr)
     {
         if (smallerTail != nullptr) smallerTail->next = nullptr;
         if (largerTail != nullptr) largerTail->next = nullptr;
@@ -53,3 +42,14 @@ void llpivotHelper(Node *&current, Node *&smaller, Node *&larger, Node *&smaller
     llpivotHelper(next, smaller, larger, smallerTail, largerTail, pivot);
 
 }
+
+void llpivot(Node *&head, Node *&smaller, Node *&larger, int pivot)
+{
+    Node* smallerTail = nullptr; 
+    Node* largerTail = nullptr;
+    smaller = larger = nullptr;
+    llpivotHelper(head, smaller, larger, smallerTail, largerTail, pivot);
+    head = nullptr;
+
+}
+
