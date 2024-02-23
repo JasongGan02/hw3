@@ -26,13 +26,13 @@ public:
     void pop() // throws std::underflow_error if empty
     {
         if (this->empty())
-            throw std::underflow_error("Stack underflow");;
+            throw std::underflow_error("Stack underflow");
         std::vector<T>::pop_back();
     }
     const T& top() const // throws std::underflow_error if empty
     {
         if (this->empty())
-            throw std::underflow_error("Stack underflow");;
+            throw std::underflow_error("Stack underflow");
         return std::vector<T>::back();
     }
     // Add other members only if necessary
