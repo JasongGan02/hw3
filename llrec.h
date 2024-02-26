@@ -78,33 +78,45 @@ Node* llfilter(Node* head, Comp pred);
 //*****************************************************************************
 
 template <typename Comp>
-Node* llfilter(Node* head, Comp pred)
-{
-    Node* tail = head;
-    Node* prev = nullptr;
-    while (tail != nullptr)
-    {
-        if (pred(tail->val))
-        {
-            Node* cur = tail;
-            tail = tail->next;
-            if (prev != nullptr)
-            {
-                prev->next = tail;
-            }
-            else
-                head = tail;
-            delete cur;
-        }
-        else
-        {
-            prev = tail;
-            tail = tail->next;
-        }
-        
+Node* llfilterHelper(Node* cur, Comp pred, Node* prev = nullptr) {
+    if (cur == nullptr) {
+        // Base case: reached the end of the list
+        return nullptr;
     }
-    return head;
 
+    if (pred(cur->val)) 
+    {
+        Node* nextNode = cur->next;
+        delete cur;
+        if (prev != nullptr) 
+        {
+            prev->next = nextNode;
+            llfilterHelper(nextNode, pred, prev);
+        } 
+        else 
+        {
+            return llfilterHelper(nextNode, pred);
+        }
+    } 
+    else 
+    {
+        if (prev == nullptr) 
+        {
+            cur->next = llfilterHelper(cur->next, pred, cur);
+            return cur;
+        } 
+        else 
+        {
+            llfilterHelper(cur->next, pred, cur);
+        }
+    }
+    return prev ? prev->next : cur; // Return the next node to link or the current if prev is null
 }
+
+template <typename Comp>
+Node* llfilter(Node* head, Comp pred) {
+    return llfilterHelper(head, pred);
+}
+
 
 #endif
